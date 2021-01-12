@@ -12,7 +12,7 @@ global class SubscriptionComplianceCheck implements Database.Batchable<sObject> 
     }*/
     
     // pour la problématiques de volumétrie sur les souscriptions 
-    // il est faut utiliser DatabaseQueryLocator ou iterable
+    // il faut utiliser DatabaseQueryLocator ou iterable
     global Database.QueryLocator start(Database.BatchableContext cnx) { 
          String query = 'SELECT Id, CompanyAddressCity__c, OrderNumber__c, CompanyAddressCountry__c, CompanyPhone__c, ContactGender__c, ContactLastName__c,'+ 
                  'ContactFirstName__c, Companyindustry__c, CompanyName__c, PrintVolume__c, BroadcastSoftware__c, PromoterDescription__c, SBQQ__RequiredById__c,'+
