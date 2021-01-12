@@ -1,5 +1,4 @@
 # test_apex
-hjfjhf
 
 Description fonctionnelle des différentes classes :
 
