@@ -32,12 +32,20 @@ global class SubscriptionComplianceCheck implements Database.Batchable<sObject> 
                if (sub.ComplianceProcess__c == IMMO_NEUF) {
                     SBQQ__Subscription__c subImmo = setConformiteImmoNeuf(sub);
                     if (subImmo != null) {
+                        subs.add(subImmo);
                         if (sub.SBQQ__RequiredById__c != null) {
                            //setParentConforme(sub.SBQQ__RequiredById__c);
                            // ajouter la souscription parent dans la liste parentSub
-                           parentSub.add(setParentConforme(sub.SBQQ__RequiredById__c));
+                           if (setParentConforme(sub.SBQQ__RequiredById__c)!=null){
+                               parentSub.add(setParentConforme(sub.SBQQ__RequiredById__c));
+                           }
+                           
                        }
-                    }
+                    } else {
+                        //en cas d'échec du processus de conformité    
+					    sub.MissingInformations__c = SubscriptionsUtil.checkMissingInfo(sub);
+					    subs.add(sub);
+					}
                 }
             }
             //Faire les opérations DML en dehors de la boucle pour respecter le Governor limit
